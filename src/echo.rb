@@ -1,6 +1,6 @@
 require 'socket'
 
-server = TCPServer.new "localhost", 4242
+server = TCPServer.new ENV.fetch('ECHO_HOST', 'localhost'), ENV.fetch('ECHO_PORT', 4242)
 puts "Listening on %s\n" % server.addr.join(":")
 
 begin
