@@ -1,10 +1,17 @@
 require 'socket'
 
-socket = TCPServer.new 4242
+server = TCPServer.new "localhost", 4242
+puts "Listening on %s\n" % server.addr.join(":")
 
-loop do
-  client = socket.accept
-  client.puts "hey"
-  client.puts "Time is #{Time.now}"
-  client.close
+begin
+  loop do
+    Thread.start server.accept do |client|
+      print client
+      client.puts "hey"
+      client.puts "Time is #{Time.now}"
+      client.close
+    end
+  end
+rescue Exception => e
+  puts "Stopped"
 end
