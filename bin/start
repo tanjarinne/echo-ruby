@@ -1,0 +1,6 @@
+#! /usr/bin/env ruby
+
+require_relative '../src/echo'
+
+Echo.new(host: ENV.fetch('ECHO_HOST', 'localhost'),
+         port: ENV.fetch('ECHO_PORT', 4242)).start()
