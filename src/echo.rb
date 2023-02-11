@@ -18,7 +18,8 @@ class Echo
           session.print "Content-Type: text/html\r\n"
           session.print "\r\n"
           session.print "#{request.method} #{request.path} #{request.version}\r\n"
-          session.print "#{request.headers.map{|e| e.join(': ') }.join("\r\n")}"
+          session.print "#{request.headers.map{|e| e.join(': ') }.join("\r\n")}\r\n"
+          session.print "#{request.data}"
           session.close
         end
       end
@@ -33,12 +34,14 @@ class Request
   attr_reader :path
   attr_reader :version
   attr_reader :headers
+  attr_reader :data
 
   def initialize(socket)
     @@socket = socket
     buffer = @@socket.gets
     @method, @path, @version = buffer.split(' ')
     @headers = extract_headers()
+    @data = @@socket.read(@headers["Content-Length"].to_i)
   end
 
   def extract_headers
