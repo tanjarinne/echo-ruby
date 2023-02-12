@@ -14,6 +14,10 @@ class Echo
     begin
       loop do
         Thread.start server.accept do |socket|
+          # When deployed in containerd, the service gets pinged with an
+          # empty body, this prevents an exception but an update will be
+          # needed here to handle it appropriately
+          next if socket.recv(3, Socket::MSG_PEEK).empty?
           request = Request.new socket
           puts "#{request.method} #{request.path}"
           socket.print Response.new(request).gets
