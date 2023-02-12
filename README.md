@@ -11,6 +11,13 @@ This project is intended to be educational, for-research-only and solving a fict
 
 ## Up and running
 
+Run using bundle
+
+```
+$ bundle exec ruby bin/start
+Listening on 127.0.0.1:4242
+```
+
 ### Configuration
 
 | Configuration | Environmental variable | Purpose | Default |
@@ -20,4 +27,4 @@ This project is intended to be educational, for-research-only and solving a fict
 
 ## Author
 
-Tanja Álvarez 2018
+Tanja Álvarez 2023
