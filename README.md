@@ -9,6 +9,22 @@
 
 This project is intended to be educational, for-research-only and solving a fictional problem, and is not intended to work on any production environment whatsoever as it can potentially leak private information due to its most basic functionality.
 
+## Up and running
+
+Run using bundle
+
+```
+$ bundle exec ruby bin/start
+Listening on 127.0.0.1:4242
+```
+
+### Configuration
+
+| Configuration | Environmental variable | Purpose | Default |
+|-|-|-|-|
+| Echo host | `ECHO_HOST` | The host Echo will run on | `localhost` |
+| Echo port | `ECHO_PORT` | The port Echo will listen to | `4242` |
+
 ## Author
 
-Tanja Álvarez 2018
+Tanja Álvarez 2023
