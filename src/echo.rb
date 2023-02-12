@@ -1,4 +1,5 @@
 require 'socket'
+require_relative 'request'
 
 class Echo
   def initialize(host: '127.0.0.1', port: 4242)
@@ -26,32 +27,5 @@ class Echo
     rescue Exception => e
       puts "Stopped"
     end
-  end
-end
-
-class Request
-  attr_reader :method
-  attr_reader :path
-  attr_reader :version
-  attr_reader :headers
-  attr_reader :data
-
-  def initialize(socket)
-    @@socket = socket
-    buffer = @@socket.gets
-    @method, @path, @version = buffer.split(' ')
-    @headers = extract_headers()
-    @data = @@socket.read(@headers["Content-Length"].to_i)
-  end
-
-  def extract_headers
-    headers = {}
-    line = ''
-    while line = @@socket.gets
-      break if line =~ /^\r\n$/
-      header, value = line.split(/:\s*/, 2)
-      headers[header] = value.to_s().gsub(/\r\n/, '')
-    end
-    headers
   end
 end
