@@ -10,7 +10,7 @@ class Echo
 
   def start
     server = TCPServer.new @host, @port
-    puts "Listening on %s:%s" % [server.addr[2], server.addr[1]]
+    puts "Listening on #{server.addr[2]}:#{server.addr[1]}"
     begin
       loop do
         Thread.start server.accept do |socket|
