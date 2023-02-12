@@ -14,6 +14,7 @@ class Echo
     begin
       loop do
         Thread.start server.accept do |socket|
+          next if socket.recv(3, Socket::MSG_PEEK).empty?
           request = Request.new socket
           puts "#{request.method} #{request.path}"
           socket.print Response.new(request).gets
