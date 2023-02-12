@@ -1,5 +1,6 @@
 require 'socket'
 require_relative 'request'
+require_relative 'response'
 
 class Echo
   def initialize(host: '127.0.0.1', port: 4242)
@@ -12,16 +13,11 @@ class Echo
     puts "Listening on %s:%s" % [server.addr[2], server.addr[1]]
     begin
       loop do
-        Thread.start server.accept do |session|
-          request = Request.new session
+        Thread.start server.accept do |socket|
+          request = Request.new socket
           puts "#{request.method} #{request.path}"
-          session.print "HTTP/1.1 200\r\n"
-          session.print "Content-Type: text/html\r\n"
-          session.print "\r\n"
-          session.print "#{request.method} #{request.path} #{request.version}\r\n"
-          session.print "#{request.headers.map{|e| e.join(': ') }.join("\r\n")}\r\n"
-          session.print "#{request.data}"
-          session.close
+          socket.print Response.new(request).gets
+          socket.close
         end
       end
     rescue Exception => e
