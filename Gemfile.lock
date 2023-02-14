@@ -1,12 +1,17 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    minitest (5.17.0)
 
 PLATFORMS
-  arm64-darwin-21
   aarch64-linux-musl
+  arm64-darwin-21
 
 DEPENDENCIES
+  minitest
+
+RUBY VERSION
+   ruby 3.1.2p20
 
 BUNDLED WITH
    2.3.11
