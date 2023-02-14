@@ -3,7 +3,7 @@ require_relative 'request'
 require_relative 'response'
 
 class Echo
-  def initialize(host: '127.0.0.1', port: 4242)
+  def initialize host: '127.0.0.1', port: 4242
     @host = host
     @port = port
   end

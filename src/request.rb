@@ -5,14 +5,14 @@ class Request
   attr_reader :headers
   attr_reader :data
 
-  def initialize(socket)
+  def initialize socket
     buffer = socket.gets
-    @method, @path, @version = buffer.split(' ')
+    @method, @path, @version = buffer.split ' '
     @headers = {}
-    while buffer = socket.gets.split(' ', 2)
-      break if buffer[0] == ""
-      headers[buffer[0].chop] = buffer[1].strip
+    while (line = socket.gets) != "\r\n"
+      header, value = line.split ':', 2
+      headers[header.chomp] = value.chomp
     end
-    @data = socket.read(@headers["Content-Length"].to_i)
+    @data = socket.read @headers["Content-Length"].to_i
   end
 end
