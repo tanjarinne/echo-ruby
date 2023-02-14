@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     minitest (5.17.0)
+    rake (13.0.6)
 
 PLATFORMS
   aarch64-linux-musl
@@ -9,6 +10,7 @@ PLATFORMS
 
 DEPENDENCIES
   minitest
+  rake
 
 RUBY VERSION
    ruby 3.1.2p20
