@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-ruby ">= 3.1.2"
+ruby ">= 3.1"
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+
+gem 'rake'
+
+group :development do
+  gem 'minitest'
+end
